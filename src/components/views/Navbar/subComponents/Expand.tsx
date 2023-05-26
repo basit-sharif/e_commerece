@@ -23,7 +23,7 @@ const Expand: FC<{ item: NavbarItemType }> = ({ item }) => {
             </div>
             <div className="flex flex-col space-y-1 mt-2">
                 {isTimeOut && item.dropDownData?.map((subItem: NavbarItemType, index: number) => (
-                    <Link className="hover:bg-gray-50 rounded-md py-1 px-5 duration-300 " href={subItem.href}>
+                    <Link key={index} className="hover:bg-gray-50 rounded-md py-1 px-5 duration-300 " href={subItem.href}>
                         {subItem.label}
                     </Link>
                 ))}
