@@ -1,3 +1,13 @@
+It's videos are comming soon on youtube so can be followed and can build same like this e-commerece website with full understanding 
+
+It is only for 5 days( uploading date 5/27/23) and after that will be available on youtube
+[download first class](https://www.filemail.com/d/ujzdpjmwydiqsyn)
+[download second class](https://www.filemail.com/d/wxjeczrwxwuzhap)
+[download third class](https://www.filemail.com/d/zsouyilxfonkmch)
+[download Fourth class](https://www.filemail.com/d/qqefamiitdgpylg)
+
+will be comming soon on [youtube](https://www.youtube.com/@leadingbright2580)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
