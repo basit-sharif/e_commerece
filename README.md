@@ -2,8 +2,10 @@ Recorded Lectures :
 
 
 [class1](https://www.youtube.com/watch?v=NgoGiTMciq8&list=PL0VhnZARkgZOQ_S-OlkS3ypYFN2gfrv_S)
-[class1](https://www.youtube.com/watch?v=V8FkyS4SMFQ&list=PL0VhnZARkgZOQ_S-OlkS3ypYFN2gfrv_S&index=2)
-[class1](https://www.youtube.com/watch?v=-dEKKijgpSQ&list=PL0VhnZARkgZOQ_S-OlkS3ypYFN2gfrv_S&index=3)
+,
+[class2](https://www.youtube.com/watch?v=V8FkyS4SMFQ&list=PL0VhnZARkgZOQ_S-OlkS3ypYFN2gfrv_S&index=2)
+,
+[class3](https://www.youtube.com/watch?v=-dEKKijgpSQ&list=PL0VhnZARkgZOQ_S-OlkS3ypYFN2gfrv_S&index=3)
 
 
 
