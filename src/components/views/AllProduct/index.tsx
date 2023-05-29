@@ -8,7 +8,7 @@ export default class AllProductsCompo extends Component<{ ProdutcData: Array<one
     }
     render() {
         return (
-            <div onClick={this.getData}>Hi</div>
+            <div onClick={this.getData}>{this.props.ProdutcData[0].price}</div>
         )
     }
 }
