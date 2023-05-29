@@ -16,8 +16,8 @@ const Navbar = () => {
     const [isNavbarOpen, setNavbarOpen] = useState<boolean>(false);
     const [cartItemNumber, setcartItemNumber] = useState<number>(0);
     return (
-        <div className="sticky top-0 backdrop-blur-lg bg-opacityDownColor z-50">
-            <div className="py-5 flex justify-between items-center space-x-12">
+        <div className="sticky top-0 backdrop-blur-lg bg-gradient-to-tr from-white via-[#ffffffde] to-opacityDownColor z-50">
+            <div className="py-5 flex justify-between items-center gap-8">
                 <div className="w-36 flex-shrink-0">
                     <Image width={500} height={500} src={"/Logo.webp"} alt="Logo" />
                 </div>
@@ -33,11 +33,11 @@ const Navbar = () => {
                             </li>
                         ))}
                     </ul>
-                    <div className="border flex items-center text-gray-600 px-3 rounded-md" >
+                    <div className="border flex items-center bg-white text-gray-600 pl-3 rounded-md" >
                         <BiSearch />
                         <input
                             type="text"
-                            className="focus:outline-none pl-1 pr-5 py-1 w-80"
+                            className="focus:outline-none pl-1 pr-5 py-1 w-80 rounded-r-md"
                             placeholder="Search in Our Store"
                         />
                     </div>

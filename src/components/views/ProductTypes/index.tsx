@@ -2,7 +2,7 @@ import Image from "next/image"
 
 const ProductsType = () => {
   return (
-    <div className="py-16 px-2 space-y-5">
+    <div className="py-16 px-10 space-y-5">
 
       {/* Heading */}
       <div className="text-center space-y-3">
@@ -11,7 +11,7 @@ const ProductsType = () => {
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 px-6 text-gray-800">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 text-gray-800 mx-auto">
 
         {/* first grid */}
         <div className="w-full flex flex-col items-center justify-between sm:flex-row col-span-1 md:col-span-2 bg-cat1 px-12" >
