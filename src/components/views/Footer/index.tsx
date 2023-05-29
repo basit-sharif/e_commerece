@@ -81,12 +81,11 @@ const Footer = () => {
                                 <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
                             </svg>
                         </a>
-                        <a className="ml-3 text-gray-500">
-                            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" className="w-5 h-5" viewBox="0 0 24 24">
-                                <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
-                                <circle cx="4" cy="4" r="2" stroke="none"></circle>
+                        <Link href={"https:github.com/basitgggg"} className="w-5 h-5 ml-3 text-gray-500">
+                            <svg className="github-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.43 9.8 8.2 11.37.6.11.82-.26.82-.58v-2.03c-3.34.73-4.03-1.61-4.03-1.61-.54-1.37-1.33-1.74-1.33-1.74-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.23 1.84 1.23 1.07 1.84 2.81 1.31 3.5 1 .1-.8.42-1.31.77-1.61-2.69-.3-5.52-1.34-5.52-5.97 0-1.32.47-2.4 1.23-3.24-.14-.3-.53-1.54.1-3.22 0 0 1.02-.33 3.34 1.25.97-.26 2-.39 3.02-.4 1.02.01 2.05.14 3.02.4 2.32-1.57 3.34-1.25 3.34-1.25.63 1.68.24 2.92.12 3.22.77.84 1.22 1.91 1.22 3.24 0 4.64-2.83 5.67-5.53 5.96.43.37.82 1.11.82 2.24v3.32c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z" />
                             </svg>
-                        </a>
+                        </Link>
                     </span>
                 </div>
             </div>

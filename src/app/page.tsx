@@ -8,7 +8,11 @@ import ProductsType from "@/components/views/ProductTypes";
 import { useEffect } from "react";
 
 async function fetchAllProductsData() {
-  let res = await fetch(`https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/production?query=*[_type == "products"]`);
+  let res = await fetch(`https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/production?query=*[_type == "products"]`, {
+    next: {
+      revalidate: 60
+    }
+  });
 
   if (!res.ok) {
     throw new Error("Failed to fetch")
