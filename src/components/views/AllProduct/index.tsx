@@ -2,13 +2,17 @@
 import { oneProductType } from "@/components/utils/ProductsDataArrayAndType"
 import { Component } from "react"
 
-export default class AllProductsCompo extends Component<{ ProdutcData: Array<oneProductType> }> {
+interface propsType {
+    productArray: Array<oneProductType>
+}
+
+export default class AllProductsCompo extends Component<{ ProdutcData: propsType }> {
     getData = () => {
-        console.log(this.props.ProdutcData)
+        console.log(this.props.ProdutcData.productArray[0].price)
     }
     render() {
         return (
-            <div onClick={this.getData}>{this.props.ProdutcData[0].price}</div>
+            <div onClick={this.getData}>{this.props.ProdutcData.productArray[0].price}</div>
         )
     }
 }
