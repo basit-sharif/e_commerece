@@ -19,8 +19,8 @@ export default async function Home() {
   let { result }: responseType = await fetchAllProductsData();
   return (
     <div>
-      {/* <Hero />
-      <ProductsType /> */}
+      <Hero />
+      <ProductsType />
       <ProductCarousel ProductData={result} />
     </div>
   )
