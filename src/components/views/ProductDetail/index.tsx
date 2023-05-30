@@ -50,7 +50,7 @@ const ProductDetail: FC<{ item: oneProductType }> = ({ item }) => {
           {item.image.map((subItem: imagesType, index: number) => {
             if (subItem._key === imageForPreviewOfSelected) {
               return (
-                <Image width={1000} height={1000} alt={subItem.alt} src={urlFor(subItem).width(1000).height(1000).url()} />
+                <Image key={index} width={1000} height={1000} alt={subItem.alt} src={urlFor(subItem).width(1000).height(1000).url()} />
               )
             }
           })}
@@ -72,7 +72,7 @@ const ProductDetail: FC<{ item: oneProductType }> = ({ item }) => {
           <div className="flex gap-2 text-pink-600">
             {
               item.size.map((subItem: string, index: number) => (
-                <div className="hover:shadow-xl font-semibold cursor-pointer rounded-full bg-gray-100 w-12 h-12 flex justify-center items-center">{subItem}</div>
+                <div key={index} className="hover:shadow-xl font-semibold cursor-pointer rounded-full bg-gray-100 w-12 h-12 flex justify-center items-center">{subItem}</div>
               ))
             }
           </div>
