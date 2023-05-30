@@ -17,7 +17,7 @@ async function fetchAllProductsData() {
 }
 
 
-const Female = async ({ params }: { params: { ftype: string } }) => {
+const Kid = async ({ params }: { params: { ftype: string } }) => {
   let res: responseType = await fetchAllProductsData();
   return (
     <div
@@ -30,4 +30,4 @@ const Female = async ({ params }: { params: { ftype: string } }) => {
   )
 }
 
-export default Female
+export default Kid
