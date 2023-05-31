@@ -13,6 +13,7 @@ const ContextWrapper = ({ children }: { children: ReactNode }) => {
             },
         ],
     }
+    
     const [state, dispatch] = useReducer(cartReducer, iniatizilerOfCart);
     useEffect(() => {
         let cart = localStorage.getItem("cart") as string;

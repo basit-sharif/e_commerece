@@ -5,7 +5,7 @@ import Card from "@/components/views/Card";
 async function getAllProductsForSearch() {
     let response = await client.fetch(`*[_type == "products"]`);
     return response;
-}
+};
 
 const Search = async ({ params }: { params: { query: string } }) => {
     let slug = (params.query).toLowerCase();
