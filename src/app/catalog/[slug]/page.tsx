@@ -30,10 +30,13 @@ async function fetchPreviewData(slug: string) {
 
 // will make static pages of every product
 export async function generateStaticParams() {
-    let res = await fetch(`https://peu0aj6l.api.sanity.io/v2023-05-26/data/query/production?query=*[_type == 'products']`).then((res: any) => res.json())
+    let res = await fetch(`https://peu0aj6l.api.sanity.io/v2023-05-26/data/query/production?query=*[_type == 'products']`, {
+        next: {
+            revalidate: 60
+        }
+    }).then((res: any) => res.json())
     return res.result.map((item: oneProductType) => { slug: item.slug });
 };
-
 
 
 const Catalog = async ({ params }: { params: { slug: string } }) => {
