@@ -19,6 +19,8 @@ const Cartstate = () => {
                 <BsCart2 size={24} />
             </div>
         )
+    }else{
+        return <p>Loading</p>
     }
 
 }
