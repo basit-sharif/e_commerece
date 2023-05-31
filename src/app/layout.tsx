@@ -24,10 +24,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <Wrapper>
           <Navbar />
-          {/* <div className='min-h-screen'>
+          <div className='min-h-screen'>
             {children}
           </div>
-          <Footer /> */}
+          <Footer />
         </Wrapper>
       </body>
     </html>
