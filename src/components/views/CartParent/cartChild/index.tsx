@@ -42,7 +42,7 @@ const CartComp = async ({ allProductsOfStore }: { allProductsOfStore: Array<oneP
                 <div className="flex flex-col basis-[69%] gap-2">
 
                     {allProductsForCart.map((item: oneProductType, index: number) => (
-                        <div className=" flex flex-shrink-0 gap-6">
+                        <div key={index} className=" flex flex-shrink-0 gap-6">
                             <div className="w-[14rem]">
                                 <Image className="rounded-xl" width={1000} height={1000} src="https://cdn.sanity.io/images/dow10h3v/production/a6a38f6a1f31dafe5f3294a4384f865b7d25a344-370x394.png" alt="Nothing" />
                             </div>
