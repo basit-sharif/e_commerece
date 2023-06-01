@@ -5,14 +5,8 @@ import Image from "next/image"
 import { FC, useEffect, useState } from "react"
 import { RiDeleteBin6Line } from "react-icons/ri"
 import AllProductsCompo from "../../AllProduct"
-import { client } from "../../../../../sanity/lib/client"
 
 
-const builder: any = imageUrlBuilder(client);
-
-function urlFor(source: any) {
-    return builder.image(source)
-}
 
 const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProductType> }) => {
     const [allProductsForCart, setAllProductsForCart] = useState<any>();
@@ -54,7 +48,7 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                     {allProductsForCart && allProductsForCart.map((item: oneProductType, index: number) => (
                         <div key={index} className=" flex flex-shrink-0 gap-6">
                             <div className="w-[14rem]">
-                                <Image className="rounded-xl" width={1000} height={1000} src={urlFor(item.image[0]).width(1000).height(1000).url()} alt={item.image[0].alt} />
+                                <Image className="rounded-xl" width={1000} height={1000} src="https://cdn.sanity.io/images/dow10h3v/production/a6a38f6a1f31dafe5f3294a4384f865b7d25a344-370x394.png" alt="Nothing" />
                             </div>
                             <div className="space-y-1 md:space-y-3 w-full">
                                 <div className="flex justify-between">
@@ -65,7 +59,7 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                                 <h3 className="text-sm md:text-base">Delivery Estimation</h3>
                                 <h4 className="text-orange-400 font-semibold md:text-xl">5 Working Days</h4>
                                 <div className="flex justify-between">
-                                    <p className="font-semibold md:text-lg">${item.price}</p>
+                                    <p className="font-semibold md:text-lg">{"$"}{item.price}</p>
                                     <div className="flex gap-2 items-center text-lg">
                                         <div className="select-none cursor-pointer flex justify-center items-center w-8 h-8 rounded-full bg-gray-200">-</div>
                                         <p>5</p>
@@ -100,7 +94,3 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
 }
 
 export default CartComp
-
-function imageUrlBuilder(client: any) {
-    throw new Error("Function not implemented.")
-}
