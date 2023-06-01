@@ -2,30 +2,33 @@
 import { oneProductType } from "@/components/utils/ProductsDataArrayAndType"
 import { cartContext } from "@/global/context"
 import Image from "next/image"
-import { FC, useContext, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { RiDeleteBin6Line } from "react-icons/ri"
 import AllProductsCompo from "../../AllProduct"
 
 
-const CartComp = async ({ allProductsOfStore }: { allProductsOfStore: Array<oneProductType> }) => {
-    let { state } = useContext(cartContext);                    //cart items from context mean ids
-    const [refresh, setRefresh] = useState(false);
-    const [allProductsForCart, setAllProductsForCart] = useState<Array<oneProductType> | []>([]);           //
+const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProductType> }) => {
+    const [allProductsForCart, setAllProductsForCart] = useState<any>();
 
-    setTimeout(() => {
-        setRefresh(true);
-    }, 5000);
+    useEffect(() => {
+        let stateStorage: any = localStorage.getItem("cart") as string;
+        stateStorage = JSON.parse(stateStorage);
 
-    state?.cart.forEach((element: { productId: string, quantity: number }) => {
-
-        for (let index = 0; index < allProductsOfStore.length; index++) {
-            const item: oneProductType = allProductsOfStore[index];
-            if (item._id === element.productId) {
-                setAllProductsForCart([...allProductsForCart, item])
-            }
+        if (stateStorage) {
+            let data = allProductsOfStore.filter((item: oneProductType) => {
+                for (let index = 0; index < stateStorage.length; index++) {
+                    let element = stateStorage[index];
+                    if (element.productId === item._id) {
+                        return true
+                    };
+                };
+            });
+            setAllProductsForCart(data)
         }
+        console.log(allProductsForCart)
+    }, []);
 
-    })
+
     return (
         <div className="py-10 px-4 md:px-10">
 
@@ -39,9 +42,9 @@ const CartComp = async ({ allProductsOfStore }: { allProductsOfStore: Array<oneP
             <div className="flex flex-col lg:flex-row gap-6">
 
 
-                <div className="flex flex-col basis-[69%] gap-2">
+                <div className="flex flex-col basis-[69%] gap-4">
 
-                    {allProductsForCart.map((item: oneProductType, index: number) => (
+                    {allProductsForCart && allProductsForCart.map((item: oneProductType, index: number) => (
                         <div key={index} className=" flex flex-shrink-0 gap-6">
                             <div className="w-[14rem]">
                                 <Image className="rounded-xl" width={1000} height={1000} src="https://cdn.sanity.io/images/dow10h3v/production/a6a38f6a1f31dafe5f3294a4384f865b7d25a344-370x394.png" alt="Nothing" />
@@ -57,11 +60,9 @@ const CartComp = async ({ allProductsOfStore }: { allProductsOfStore: Array<oneP
                                 <div className="flex justify-between">
                                     <p className="font-semibold md:text-lg">{item.price}</p>
                                     <div className="flex gap-2 items-center text-lg">
-                                        <div
-                                            className="select-none cursor-pointer flex justify-center items-center w-7 h-7 rounded-full bg-gray-200">-</div>
+                                        <div className="select-none cursor-pointer flex justify-center items-center w-8 h-8 rounded-full bg-gray-200">-</div>
                                         <p>5</p>
-                                        <div
-                                            className="select-none cursor-pointer flex justify-center items-center w-7 h-7 rounded-full  border-gray-800">+</div>
+                                        <div className="border select-none cursor-pointer flex justify-center items-center w-8 h-8 rounded-full  border-gray-800">+</div>
                                     </div>
                                 </div>
                             </div>

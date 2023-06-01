@@ -9,12 +9,9 @@ async function fatchAllStoreProducts() {
 };
 
 const Cart = async () => {
-  let allProductsOfStore = await fatchAllStoreProducts();             //all products of sanity
+  let allProductsOfStore = await fatchAllStoreProducts();
   return (
-    <ContextWrapper>
-      {/* @ts-ignore */}
-      <CartComp allProductsOfStore={allProductsOfStore.result} />
-    </ContextWrapper>
+    <CartComp allProductsOfStore={allProductsOfStore.result} />
   )
 }
 
