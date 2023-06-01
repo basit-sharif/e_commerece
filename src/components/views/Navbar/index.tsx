@@ -57,7 +57,9 @@ const Navbar = () => {
                                 placeholder="Search in Our Store"
                             />
                         </div>
-                        <Cartstate />
+                        <Link href={"/cart"}>
+                            <Cartstate />
+                        </Link>
                     </div>
                     <div className="cursor-pointer" onClick={() => setNavbarOpen(!isNavbarOpen)}>
                         {isNavbarOpen ?

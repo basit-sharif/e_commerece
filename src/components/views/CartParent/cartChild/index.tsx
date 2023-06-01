@@ -7,7 +7,6 @@ import { RiDeleteBin6Line } from "react-icons/ri"
 import AllProductsCompo from "../../AllProduct"
 
 
-
 const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProductType> }) => {
     const [allProductsForCart, setAllProductsForCart] = useState<any>();
 
