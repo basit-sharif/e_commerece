@@ -1,7 +1,7 @@
 import CartComp from "@/components/views/CartParent/cartChild"
 import ContextWrapper from "@/global/context"
 
-export async function fatchAllStoreProducts() {
+async function fatchAllStoreProducts() {
   let res = await fetch(`https://peu0aj6l.api.sanity.io/v2023-05-26/data/query/production?query=*[_type == 'products']`, {
     cache: "no-store",
   })
