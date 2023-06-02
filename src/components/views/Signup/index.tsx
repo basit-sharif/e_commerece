@@ -1,4 +1,5 @@
 "use client"
+import { ImGoogle } from "react-icons/im"
 import { cartContext } from '@/global/context';
 import Link from 'next/link';
 import { useContext, useState } from 'react';
@@ -9,9 +10,8 @@ type SignupFormData = {
     password: string;
 };
 
-
 const SignupFormComp = () => {
-    let { signUpUser } = useContext(cartContext);
+    let { signUpUser, signUpViaGoogle } = useContext(cartContext);
 
 
     const [formData, setFormData] = useState<SignupFormData>({
@@ -22,6 +22,10 @@ const SignupFormComp = () => {
 
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
+    function handleSignupWithGoogle() {
+        console.log("called")
+        signUpViaGoogle();
+    }
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
@@ -114,6 +118,16 @@ const SignupFormComp = () => {
                     {errors.password && (
                         <p className="text-red-500 text-xs italic">{errors.password}</p>
                     )}
+                </div>
+                <div className="flex items-center justify-center py-3">
+                    <button
+                        className="border flex gap-2 items-center justify-center bg-purple-100 hover:bg-purple-200 text-gray-700 font-semibold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
+                        type="button"
+                        onClick={handleSignupWithGoogle}
+                    >
+                        <ImGoogle size={25} fill="#ced70c" />
+                        SignUp With Google
+                    </button>
                 </div>
                 <div className="flex items-center justify-between">
                     <Link className='text-blue-400 text-sm' href={"/login"}>Already have an account?</Link>
