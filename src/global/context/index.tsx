@@ -108,6 +108,7 @@ const ContextWrapper = ({ children }: { children: ReactNode }) => {
         setLoading(true);
         signOut(auth);
         setLoading(false);
+        window.location.reload();
     }
 
     return (

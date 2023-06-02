@@ -28,7 +28,7 @@ const SubComp = () => {
                 </div>
             }
 
-            <div className={`${isSideProfileOpen ? "visible translate-x-0" : "invisible translate-x-full"} duration-500 py-4 px-4 w-80 bg-gray-800 h-full text-gray-100 absolute right-0 top-0 bottom-0 z-30`}>
+            <div className={`${isSideProfileOpen ? "visible translate-x-0" : "invisible translate-x-full"} duration-500 py-4 px-4 w-80 bg-gray-800 h-full text-gray-100 absolute right-0 top-0 bottom-0 z-50`}>
                 <div className="flex justify-between py-2 items-center">
                     <h6 className="font-semibold text-xl">Profile</h6>
                     <div onClick={() => setSideProfileOpen(false)}>

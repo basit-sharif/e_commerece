@@ -24,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <TopLabel />
+        <div className='overflow-hidden w-screen'>
+          <TopLabel />
+        </div>
         <Wrapper>
           <Navbar />
           <div className='min-h-screen'>

@@ -29,7 +29,7 @@ const Navbar = () => {
 
     return (
         <ContextWrapper>
-            <div className="sticky top-0 backdrop-blur-lg bg-gradient-to-tr from-white via-[#ffffffde] to-opacityDownColor z-50">
+            <div className="sticky top-0 backdrop-blur-lg bg-gradient-to-tr from-white via-[#ffffffde] to-opacityDownColor z-20">
                 <div className="py-5 flex justify-between items-center gap-8">
                     <Link href="/" className="w-36 flex-shrink-0">
                         <Image width={500} height={500} src={"/Logo.webp"} alt="Logo" />

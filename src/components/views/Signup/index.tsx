@@ -11,7 +11,7 @@ type SignupFormData = {
 };
 
 const SignupFormComp = () => {
-    let { signUpUser, signUpViaGoogle } = useContext(cartContext);
+    let { signUpUser, signUpViaGoogle, loading } = useContext(cartContext);
 
 
     const [formData, setFormData] = useState<SignupFormData>({
@@ -132,11 +132,12 @@ const SignupFormComp = () => {
                 <div className="flex items-center justify-between">
                     <Link className='text-blue-400 text-sm' href={"/login"}>Already have an account?</Link>
                     <button
+                        disabled={loading}
                         className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-5 rounded focus:outline-none focus:shadow-outline"
                         type="button"
                         onClick={handleSignup}
                     >
-                        Signup
+                        {loading ? "Loading..." : "Signup"}
                     </button>
                 </div>
             </div>
