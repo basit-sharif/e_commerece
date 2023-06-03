@@ -11,8 +11,7 @@ type SignupFormData = {
 };
 
 const SignupFormComp = () => {
-    let { signUpUser, signUpViaGoogle, loading } = useContext(cartContext);
-
+    let { signUpUser, userData, signUpViaGoogle, loading, sendEmailVerificationCode } = useContext(cartContext);
 
     const [formData, setFormData] = useState<SignupFormData>({
         fullName: '',
@@ -65,7 +64,7 @@ const SignupFormComp = () => {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen">
-            <div className="bg-slate-100 shadow-2xl border-t-8 border-pink-700 rounded px-8 pt-6 pb-8">
+            <div className="bg-slate-100 shadow-2xl border-t-8 border-pink-700 rounded px-4 md:px-8 pt-6 pb-8">
                 <h2 className="text-2xl font-bold mb-4">Signup</h2>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="fullName">
@@ -129,17 +128,27 @@ const SignupFormComp = () => {
                         SignUp With Google
                     </button>
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between space-x-2">
                     <Link className='text-blue-400 text-sm' href={"/login"}>Already have an account?</Link>
                     <button
                         disabled={loading}
-                        className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-5 rounded focus:outline-none focus:shadow-outline"
+                        className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 md:px-5 rounded focus:outline-none focus:shadow-outline"
                         type="button"
                         onClick={handleSignup}
                     >
                         {loading ? "Loading..." : "Signup"}
                     </button>
                 </div>
+                {userData && (
+                    <div className="mt-3 flex flex-col justify-center items-center">
+                        <p>Send Varification Email</p>
+                        <button
+                            className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-5 rounded focus:outline-none focus:shadow-outline"
+                            onClick={sendEmailVerificationCode}>
+                            Send
+                        </button>
+                    </div>
+                )}
             </div>
         </div>
     );
