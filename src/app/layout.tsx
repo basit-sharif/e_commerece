@@ -30,9 +30,6 @@ export default function RootLayout({
           <TopLabel />
         </div>
         <Wrapper>
-          <ContextWrapper>
-            <SignupFormComp />
-          </ContextWrapper>
           <Navbar />
           <div className='min-h-screen'>
             {children}
