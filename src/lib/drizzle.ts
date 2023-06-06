@@ -6,7 +6,7 @@ import { integer, pgTable, serial, text, timestamp, varchar } from 'drizzle-orm/
 export const cartTableDrizzle = pgTable("cart", {
     product_id: varchar("product_id", { length: 255 }).notNull(),
     quantity: integer("quantity"),
-    user_id: varchar("product_id", { length: 255 }).notNull(),
+    user_id: varchar("user_id", { length: 255 }).notNull(),
 });
 
 export type typeOfCartTable = InferModel<typeof cartTableDrizzle>;
