@@ -4,7 +4,6 @@ import { cartContext } from "@/global/context"
 import { useContext, useState } from "react"
 import Link from "next/link"
 
-
 const SubComp = () => {
     let { userData, LogOut, sendEmailVerificationCode, updateUserNamePhoto, loading } = useContext(cartContext)
     const [isSideProfileOpen, setSideProfileOpen] = useState(false);

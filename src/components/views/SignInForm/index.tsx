@@ -1,10 +1,17 @@
 "use client"
 import { cartContext } from '@/global/context';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 const SignInForm = () => {
-  let { signInUser, loading } = useContext(cartContext)
+  let { userData, signInUser, loading } = useContext(cartContext)
   const [formData, setFormData] = useState({ email: '', password: '' });
+
+
+  useEffect(() => {
+    if (userData) {
+      window.location.href = "/"
+    }
+  }, [userData]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

@@ -2,7 +2,7 @@
 import { ImGoogle } from "react-icons/im"
 import { cartContext } from '@/global/context';
 import Link from 'next/link';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 type SignupFormData = {
     fullName: string;
@@ -12,6 +12,14 @@ type SignupFormData = {
 
 const SignupFormComp = () => {
     let { signUpUser, userData, signUpViaGoogle, loading, sendEmailVerificationCode } = useContext(cartContext);
+
+    useEffect(() => {
+        if (userData) {
+            window.location.href = "/"
+        }
+    }, [userData]);
+
+
 
     const [formData, setFormData] = useState<SignupFormData>({
         fullName: '',
