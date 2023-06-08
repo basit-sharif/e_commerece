@@ -16,41 +16,37 @@ const builder: any = imageUrlBuilder(client);
 function urlFor(source: any) {
     return builder.image(source)
 }
-
 const notificationError = (title: string) => {
     toast(title, {
         position: "top-right"
     })
 };
 
+
+
+
 const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProductType> }) => {
     const [allProductsForCart, setAllProductsForCart] = useState<any>();
     let { userData, cartArray, dispatch, loading } = useContext(cartContext)
     const [totalPrice, setTotalPrice] = useState(0);
-    const [allowedToAdd, setAllowedToAdd] = useState(true);
     let router = useRouter();
 
-    function PriceSubTotal(round: number) {
+    function PriceSubTotal() {
+        let orignalToSend: number = 0;
         for (let index = 0; index < cartArray.length; index++) {
-            setAllowedToAdd(false);
             const element = cartArray[index];
             let subTotalPrice = element.quantity * element.price;
+            orignalToSend = orignalToSend + subTotalPrice;
             if (subTotalPrice) {
-                if (round === 1) {
-                    setTotalPrice(totalPrice + subTotalPrice);
-                } else if (round === 2) {
-                    setTotalPrice((prev: any) => subTotalPrice);
-                    router.refresh();
-                    // console.log(cartArray,totalPrice)
-                }
+                setTotalPrice(orignalToSend);
+                router.refresh();
             }
         }
     }
 
 
-
     useEffect(() => {
-        PriceSubTotal(2);
+        PriceSubTotal();
     }, [allProductsForCart])
 
 
@@ -109,29 +105,7 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
             price: price,
         });
         notificationError("Incremented by One");
-        console.log(returnedVal)
-        // if (returnedVal === "sucess") {
-        // }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
