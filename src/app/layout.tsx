@@ -30,11 +30,11 @@ export default function RootLayout({
           <TopLabel />
         </div>
         <Wrapper>
-          {/* <Navbar /> */}
+          <Navbar />
           <div className='min-h-screen'>
             {children}
           </div>
-          {/* <Footer /> */}
+          <Footer />
         </Wrapper>
       </body>
     </html>
