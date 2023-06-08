@@ -39,8 +39,9 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                 if (round === 1) {
                     setTotalPrice(totalPrice + subTotalPrice);
                 } else if (round === 2) {
-                    setTotalPrice(subTotalPrice);
+                    setTotalPrice((prev:any)=>subTotalPrice);
                     router.refresh();
+                    // console.log(cartArray,totalPrice)
                 }
             }
         }
@@ -84,6 +85,7 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                 stableQuantity = element.quantity
             }
         });
+        
         if (stableQuantity - 1 <= 1) {
             notificationError("Did not accept lower than 1")
         } else {
@@ -110,9 +112,9 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
             user_id: userData.uuid,
             price: price,
         })
-        notificationError("Incremented by One")
+        notificationError("Incremented by One");
+        console.log(returnedVal)
         if (returnedVal === "sucess") {
-            console.log("succes")
             PriceSubTotal(2);
         }
     }

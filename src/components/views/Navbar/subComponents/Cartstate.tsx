@@ -4,13 +4,12 @@ import { useContext, useEffect, useState } from "react"
 import { BsCart2 } from "react-icons/bs"
 
 const Cartstate = () => {
+    let { cartArray } = useContext(cartContext);
     const [quantity, setQuantity] = useState(0);
-    const isBrowser = () => typeof window !== undefined;
 
     useEffect(() => {
-        if (isBrowser()) {
-            let data = localStorage.getItem("cart") as string;
-            setQuantity(JSON.parse(data).length);
+        if (cartArray.length !== 0) {
+            setQuantity(cartArray.length);
         }
     }, []);
 
