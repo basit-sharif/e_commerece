@@ -37,7 +37,6 @@ export default class AllProductsCompo extends Component<{ ProdutcData: propsType
         }
         this.start = this.start + 10;
         this.end = this.end + 10;
-        // console.log(this.props.ProdutcData.productArray[0].price)
     }
     render() {
         return (

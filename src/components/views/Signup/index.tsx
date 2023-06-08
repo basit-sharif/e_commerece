@@ -3,6 +3,7 @@ import { ImGoogle } from "react-icons/im"
 import { cartContext } from '@/global/context';
 import Link from 'next/link';
 import { useContext, useEffect, useState } from 'react';
+import toast, { Toaster } from "react-hot-toast";
 
 type SignupFormData = {
     fullName: string;
@@ -10,14 +11,24 @@ type SignupFormData = {
     password: string;
 };
 
+
+const notificationError = (title: string) => {
+    toast(title, {
+        position: "top-right"
+    })
+};
+
 const SignupFormComp = () => {
-    let { signUpUser, userData, signUpViaGoogle, loading, sendEmailVerificationCode } = useContext(cartContext);
+    let { errorsOfFirebase, signUpUser, userData, signUpViaGoogle, loading, sendEmailVerificationCode } = useContext(cartContext);
 
     useEffect(() => {
         if (userData) {
             window.location.href = "/"
         }
-    }, [userData]);
+        if (errorsOfFirebase.errorMessage.length > 0) {
+            notificationError(errorsOfFirebase.errorMessage)
+        };
+    }, [userData, errorsOfFirebase]);
 
 
 
@@ -30,7 +41,6 @@ const SignupFormComp = () => {
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
     function handleSignupWithGoogle() {
-        console.log("called")
         signUpViaGoogle();
     }
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,6 +82,7 @@ const SignupFormComp = () => {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen">
+            <Toaster />
             <div className="bg-slate-100 shadow-2xl border-t-8 border-pink-700 rounded px-4 md:px-8 pt-6 pb-8">
                 <h2 className="text-2xl font-bold mb-4">Signup</h2>
                 <div className="mb-4">

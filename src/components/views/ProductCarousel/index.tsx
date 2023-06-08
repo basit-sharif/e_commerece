@@ -22,7 +22,6 @@ const ProductCarousel: FC<{ ProductData: Array<oneProductType> }> = ({ ProductDa
         }
     };
     function mouseDown() {
-        console.log("moving orignal")
         isDragging = true;
     }
     function mouseUp() {

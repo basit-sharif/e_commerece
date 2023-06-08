@@ -4,36 +4,78 @@ import { cartReducer } from "../reducer";
 import { auth } from "@/lib/firebase";
 import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import BASE_PATH_FORAPI from "@/components/shared/BasePath";
 
 export const cartContext = createContext<any>(null);
 
 interface indexForError {
     [key: string]: string
-}
+};
+
 
 const ContextWrapper = ({ children }: { children: ReactNode }) => {
     let router = useRouter();
     const [userData, setUserData] = useState<any>();
     const [errorViaUserCredential, setErrorViaUserCredential] = useState<indexForError | "">("")
     const [loading, setLoading] = useState(false);
-    const iniatizilerOfCart = {
-        cart: [],
-    }
-
-
-    const [state, dispatch] = useReducer(cartReducer, iniatizilerOfCart);
-    useEffect(() => {
-        let cart = localStorage.getItem("cart") as string;
-        if (cart === null) {
-            localStorage.setItem("cart", JSON.stringify(state.cart));
-        } else {
-            iniatizilerOfCart.cart = JSON.parse(cart);
-        }
+    const [cartArray, setCartArray] = useState<any>([]);
+    const [errorsOfFirebase, setErrorsOfFirebase] = useState({
+        key: "",
+        errorMessage: "",
     })
 
+    async function fetchApiForAllCartItems() {
+        let res = await fetch(`${BASE_PATH_FORAPI}/api/cartfunc`);
+        if (!res.ok) {
+            throw new Error("Failed to Fetch")
+        }
+        let dataToreturn = await res.json();
+        setCartArray(dataToreturn.allCartData);
+    }
+
     useEffect(() => {
-        localStorage.setItem("cart", JSON.stringify(state.cart))
-    }, [state.cart])
+        fetchApiForAllCartItems();
+    }, []);
+
+
+
+
+
+
+
+
+
+
+    async function dispatch(payload: string, data: any) {
+        if (payload === "addToCart") {
+            console.log("func running of add to cart");
+            await fetch(`${BASE_PATH_FORAPI}/api/cartfunc`, {
+                method: "POST",
+                body: JSON.stringify(data)
+            });
+        } else if (payload === "removeFromCart") {
+            console.log("func running of remove from cart");
+            let dataa = await fetch(`${BASE_PATH_FORAPI}/api/cartfunc?product_id=${data.product_id}&user_id=${data.user_id}`, {
+                method: "DELETE",
+            });
+            let NotData = await dataa.json();
+        } else if (payload === "updateCart") {
+            setLoading(true);
+            let dataa = await fetch(`${BASE_PATH_FORAPI}/api/cartfunc`, {
+                method: "PUT",
+                body:JSON.stringify(data)
+            });
+            let NotData = await dataa.json();
+            console.log("func running of update cart",NotData);
+            setLoading(false);
+        }
+        fetchApiForAllCartItems();
+    };
+
+
+
+
+
 
 
 
@@ -58,7 +100,6 @@ const ContextWrapper = ({ children }: { children: ReactNode }) => {
             }
         });
     }, [])
-    console.log(user)
 
 
     let provider = new GoogleAuthProvider();
@@ -83,11 +124,16 @@ const ContextWrapper = ({ children }: { children: ReactNode }) => {
 
     function signUpUser(email: string, password: string) {
         setLoading(true);
-        return createUserWithEmailAndPassword(auth, email, password).then((res: any) => {
+        createUserWithEmailAndPassword(auth, email, password).then((res: any) => {
             setLoading(false);
             router.push("/");
         }).catch((res: any) => {
-            console.log("errror: ", res)
+            let error = res.code.split("/")
+            error = error[error.length - 1];
+            setErrorsOfFirebase({
+                key: "signup",
+                errorMessage: error
+            })
             setLoading(false);
         });
         setLoading(false);
@@ -95,11 +141,14 @@ const ContextWrapper = ({ children }: { children: ReactNode }) => {
 
     function signInUser(email: string, password: string) {
         setLoading(true);
-        return signInWithEmailAndPassword(auth, email, password).then((res: any) => {
+        signInWithEmailAndPassword(auth, email, password).then((res: any) => {
             setLoading(false);
         }).catch((res: any) => {
-            setErrorViaUserCredential({
-                "signInError": "Error occured via signin with email and password"
+            let error = res.code.split("/")
+            error = error[error.length - 1];
+            setErrorsOfFirebase({
+                key: "signin",
+                errorMessage: error
             })
         });
         setLoading(false);
@@ -139,7 +188,7 @@ const ContextWrapper = ({ children }: { children: ReactNode }) => {
     }
 
     return (
-        <cartContext.Provider value={{ state, dispatch, updateUserNamePhoto, userData, sendEmailVerificationCode, signUpUser, signUpViaGoogle, signInUser, LogOut, loading }}>
+        <cartContext.Provider value={{ cartArray, errorsOfFirebase, dispatch, updateUserNamePhoto, userData, sendEmailVerificationCode, signUpUser, signUpViaGoogle, signInUser, LogOut, loading }}>
             {children}
         </cartContext.Provider>
     )

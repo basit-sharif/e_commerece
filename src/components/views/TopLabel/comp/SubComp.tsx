@@ -12,7 +12,6 @@ const SubComp = () => {
     let name = userData?.displayName;
 
     function handleEditName() {
-        console.log("i am goign to call update user name func")
         updateUserNamePhoto(nameOf);
         setUserEditingName(false);
         window.location.reload();
