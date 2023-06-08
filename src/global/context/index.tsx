@@ -70,6 +70,7 @@ const ContextWrapper = ({ children }: { children: ReactNode }) => {
             setLoading(false);
         }
         fetchApiForAllCartItems();
+        return "sucess"
     };
 
 

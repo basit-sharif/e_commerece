@@ -7,6 +7,7 @@ export const cartTableDrizzle = pgTable("cart", {
     product_id: varchar("product_id", { length: 255 }).notNull(),
     quantity: integer("quantity"),
     user_id: varchar("user_id", { length: 255 }).notNull(),
+    price: integer("price"),
 });
 
 export type typeOfCartTable = InferModel<typeof cartTableDrizzle>;

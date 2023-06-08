@@ -8,12 +8,10 @@ import AllProductsCompo from "../../AllProduct"
 import { client } from "../../../../../sanity/lib/client"
 import imageUrlBuilder from '@sanity/image-url'
 import toast, { Toaster } from "react-hot-toast"
+import { useRouter } from "next/navigation"
 
 
-// let totalPrice = quantity * item.price;
-//                                                     if (totalPrice) {
-//                                                         setTotalPrice(totalPrice + totalPrice);
-//                                                     }
+
 const builder: any = imageUrlBuilder(client);
 function urlFor(source: any) {
     return builder.image(source)
@@ -29,6 +27,33 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
     const [allProductsForCart, setAllProductsForCart] = useState<any>();
     let { userData, cartArray, dispatch, loading } = useContext(cartContext)
     const [totalPrice, setTotalPrice] = useState(0);
+    const [allowedToAdd, setAllowedToAdd] = useState(true);
+    let router = useRouter();
+
+    function PriceSubTotal(round: number) {
+        for (let index = 0; index < cartArray.length; index++) {
+            setAllowedToAdd(false);
+            const element = cartArray[index];
+            let subTotalPrice = element.quantity * element.price;
+            if (subTotalPrice) {
+                if (round === 1) {
+                    setTotalPrice(totalPrice + subTotalPrice);
+                } else if (round === 2) {
+                    setTotalPrice(subTotalPrice);
+                    router.refresh();
+                }
+            }
+        }
+    }
+
+
+
+
+    if (cartArray.length !== 0) {
+        if (allowedToAdd) {
+            PriceSubTotal(1);
+        }
+    }
 
     function handleRemove(product_id: string) {
         if (userData) {
@@ -47,37 +72,49 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                 };
             });
             setAllProductsForCart(data);
+
         }
 
     }, [cartArray]);
 
-    function handleDecrementByOne(product_id: string) {
+    async function handleDecrementByOne(product_id: string, price: any) {
         let stableQuantity: number = 0;
         cartArray.forEach((element: any) => {
             if (element.product_id == product_id) {
                 stableQuantity = element.quantity
             }
         });
-        dispatch("updateCart", {
-            product_id: product_id,
-            quantity: stableQuantity - 1,
-            user_id: userData.uuid,
-        });
-        notificationError("Decremented by One")
+        if (stableQuantity - 1 <= 1) {
+            notificationError("Did not accept lower than 1")
+        } else {
+            await dispatch("updateCart", {
+                product_id: product_id,
+                quantity: stableQuantity - 1,
+                user_id: userData.uuid,
+                price: price,
+            });
+            notificationError("Decremented by One")
+        }
+        PriceSubTotal(2);
     }
-    function handleIncrementByOne(product_id: string) {
+    async function handleIncrementByOne(product_id: string, price: any) {
         let stableQuantity: number = 0;
         cartArray.forEach((element: any) => {
             if (element.product_id == product_id) {
                 stableQuantity = element.quantity
             }
         });
-        dispatch("updateCart", {
+        let returnedVal = await dispatch("updateCart", {
             product_id: product_id,
             quantity: stableQuantity + 1,
             user_id: userData.uuid,
+            price: price,
         })
         notificationError("Incremented by One")
+        if (returnedVal === "sucess") {
+            console.log("succes")
+            PriceSubTotal(2);
+        }
     }
     return (
         <div className="py-10 px-4 md:px-10">
@@ -114,7 +151,7 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                                     <p className="font-semibold md:text-lg">{"$"}{item.price}</p>
                                     <div className={`flex gap-2 ${loading ? "opacity-25" : "opacity-100"} items-center text-lg`}>
                                         <button
-                                            onClick={() => handleDecrementByOne(item._id)}
+                                            onClick={() => handleDecrementByOne(item._id, item.price)}
                                             className="select-none cursor-pointer flex justify-center items-center w-8 h-8 rounded-full bg-gray-200">
                                             -
                                         </button>
@@ -133,7 +170,7 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                                             }
                                         </p>
                                         <button
-                                            onClick={() => handleIncrementByOne(item._id)}
+                                            onClick={() => handleIncrementByOne(item._id, item.price)}
                                             disabled={loading}
                                             className="border select-none cursor-pointer flex justify-center items-center w-8 h-8 rounded-full  border-gray-800"
                                         >

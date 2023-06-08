@@ -15,7 +15,7 @@ export async function GET() {
 export async function POST(req: NextRequest) {
     let request = await req.json();
     try {
-        if (request.product_id && request.quantity && request.user_id) {
+        if (request.product_id && request.quantity && request.user_id && request.price) {
             let response = await db.insert(cartTableDrizzle).values(request).returning();
             return NextResponse.json({ response })
         } else {
