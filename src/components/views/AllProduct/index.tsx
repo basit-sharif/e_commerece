@@ -3,7 +3,7 @@ import BASE_PATH_FORAPI from "@/components/shared/BasePath";
 import { oneProductType } from "@/components/utils/ProductsDataArrayAndType"
 import { Component } from "react"
 import InfiniteScroll from "react-infinite-scroll-component";
-import Card from "../Card";
+import CardAll from "../CardAll";
 
 interface propsType {
     productArray: Array<oneProductType>
@@ -50,10 +50,10 @@ export default class AllProductsCompo extends Component<{ ProdutcData: propsType
                         <b>Yay! You have seen it all</b>
                     </p>
                 }
-                className="grid grid-cols-1 md:grid-cols-2 py-10 lg:grid-cols-3 gap-4"
+                className="content-center justify-center grid grid-cols-2 md:grid-cols-3 py-10 lg:grid-cols-4 gap-4"
             >
                 {this.state.items.map((item: oneProductType, index: number) => (
-                    <Card key={index} singleProductData={item} />
+                    <CardAll key={index} singleProductData={item} />
                 ))}
             </InfiniteScroll>
         )

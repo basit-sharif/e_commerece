@@ -1,5 +1,5 @@
 import { oneProductType, responseType } from "@/components/utils/ProductsDataArrayAndType";
-import Card from "@/components/views/Card";
+import CardAll from "@/components/views/CardAll";
 import { FC } from "react"
 
 async function fetchAllProductsData() {
@@ -21,10 +21,10 @@ const Male = async ({ params }: { params: { ftype: string } }) => {
     let res: responseType = await fetchAllProductsData();
     return (
         <div
-            className="grid grid-cols-1 md:grid-cols-2 py-10 lg:grid-cols-3 gap-4"
+            className="grid grid-cols-2 md:grid-cols-3 py-10 lg:grid-cols-4 gap-4"
         >
             {res.result.map((items: oneProductType, index: number) => (
-                <Card key={index} singleProductData={items} />
+                <CardAll key={index} singleProductData={items} />
             ))}
         </div>
     )

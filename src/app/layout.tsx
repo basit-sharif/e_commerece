@@ -26,16 +26,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className='overflow-hidden w-screen'>
+        {/* <div className='overflow-hidden w-screen'>
           <TopLabel />
         </div>
         <Wrapper>
-          <Navbar />
+          <Navbar /> */}
           <div className='min-h-screen'>
             {children}
           </div>
-          <Footer />
-        </Wrapper>
+          {/* <Footer />
+        </Wrapper> */}
       </body>
     </html>
   )

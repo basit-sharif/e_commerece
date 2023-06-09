@@ -31,8 +31,8 @@ const SubComp = () => {
                 </div>
                 :
                 <div className="flex gap-2">
-                    <Link href="/signup" className="text-white bg-gray-900 px-3 py-1">SignUp</Link>
-                    <Link href="/signin" className="text-white border border-purple-800 px-3 py-1">SignIn</Link>
+                    <Link href="/signup" className="hidden md:flex text-white bg-gray-900 px-3 py-1">SignUp</Link>
+                    <Link href="/signin" className=" text-white border border-purple-800 px-3 py-1 mr-10 md:mr-0">SignIn</Link>
                 </div>
             }
 
