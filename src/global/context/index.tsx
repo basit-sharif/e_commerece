@@ -31,8 +31,8 @@ const ContextWrapper = ({ children }: { children: ReactNode }) => {
         }
         let dataToreturn = await res.json();
         await setCartArray((prev: any) => dataToreturn.allCartData);
+        router.refresh();
         if (dataToreturn) {
-            console.log("cart : " , cartArray)
             return true
         }
     }
@@ -40,12 +40,6 @@ const ContextWrapper = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         fetchApiForAllCartItems();
     }, []);
-
-
-
-
-
-
 
 
 
@@ -189,6 +183,7 @@ const ContextWrapper = ({ children }: { children: ReactNode }) => {
                 displayName: userName, photoURL: "https://abdulbasit-self.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FAbdulBasit.40cf649b.png&w=640&q=75"
             }).then(() => {
                 setLoading(false);
+                window.location.reload();
             }).catch((error: any) => {
                 setLoading(false);
                 console.log(error)

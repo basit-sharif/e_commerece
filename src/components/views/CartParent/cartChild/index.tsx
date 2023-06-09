@@ -61,7 +61,7 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
             let data = allProductsOfStore.filter((item: oneProductType) => {
                 for (let index = 0; index < cartArray.length; index++) {
                     let element: any = cartArray[index];
-                    if (element.product_id === item._id) {
+                    if (element.product_id === item._id && element.user_id === userData.uuid) {
                         return true
                     };
                 };
@@ -125,54 +125,57 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
 
                 <div className="flex flex-col basis-[69%] gap-4">
 
-                    {allProductsForCart && allProductsForCart.map((item: oneProductType, index: number) => (
-                        <div key={index} className=" flex flex-shrink-0 gap-6">
-                            <div className="w-[14rem]">
-                                <Image className="rounded-xl" width={1000} height={1000} src={urlFor(item.image[0]).width(1000).height(1000).url()} alt={item.image[0].alt} />
-                            </div>
-                            <div className="space-y-1 md:space-y-3 w-full">
-                                <div className="flex justify-between">
-                                    <h2 className="md:text-2xl font-light text-gray-700">{item.productName}</h2>
-                                    <div onClick={() => handleRemove(item._id)}>
-                                        <RiDeleteBin6Line size={28} />
+                    {allProductsForCart && allProductsForCart.map((item: oneProductType, index: number) => {
+                        return (
+                            <div key={index} className=" flex flex-shrink-0 gap-6">
+                                <div className="w-[14rem]">
+                                    <Image className="rounded-xl" width={1000} height={1000} src={urlFor(item.image[0]).width(1000).height(1000).url()} alt={item.image[0].alt} />
+                                </div>
+                                <div className="space-y-1 md:space-y-3 w-full">
+                                    <div className="flex justify-between">
+                                        <h2 className="md:text-2xl font-light text-gray-700">{item.productName}</h2>
+                                        <div onClick={() => handleRemove(item._id)}>
+                                            <RiDeleteBin6Line size={28} />
+                                        </div>
+                                    </div>
+                                    <p className="text-gray-400 font-medium">{item.productTypes[1] ? item.productTypes[1] : "All"}</p>
+                                    <h3 className="text-sm md:text-base">Delivery Estimation</h3>
+                                    <h4 className="text-orange-400 font-semibold md:text-xl">5 Working Days</h4>
+                                    <div className="flex justify-between">
+                                        <p className="font-semibold md:text-lg">{"$"}{item.price}</p>
+                                        <div className={`flex gap-2 ${loading ? "opacity-25" : "opacity-100"} items-center text-lg`}>
+                                            <button
+                                                onClick={() => handleDecrementByOne(item._id, item.price)}
+                                                className="select-none cursor-pointer flex justify-center items-center w-8 h-8 rounded-full bg-gray-200">
+                                                -
+                                            </button>
+                                            <p>
+                                                {
+                                                    cartArray.map((subItem: any) => {
+                                                        let matching = subItem.product_id === item._id;
+                                                        let quantity = subItem.quantity;
+                                                        console.log(quantity)
+                                                        if (matching) {
+                                                            return quantity;
+                                                        } else {
+                                                            return ""
+                                                        }
+                                                    })
+                                                }
+                                            </p>
+                                            <button
+                                                onClick={() => handleIncrementByOne(item._id, item.price)}
+                                                disabled={loading}
+                                                className="border select-none cursor-pointer flex justify-center items-center w-8 h-8 rounded-full  border-gray-800"
+                                            >
+                                                +
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                                <p className="text-gray-400 font-medium">{item.productTypes[1] ? item.productTypes[1] : "All"}</p>
-                                <h3 className="text-sm md:text-base">Delivery Estimation</h3>
-                                <h4 className="text-orange-400 font-semibold md:text-xl">5 Working Days</h4>
-                                <div className="flex justify-between">
-                                    <p className="font-semibold md:text-lg">{"$"}{item.price}</p>
-                                    <div className={`flex gap-2 ${loading ? "opacity-25" : "opacity-100"} items-center text-lg`}>
-                                        <button
-                                            onClick={() => handleDecrementByOne(item._id, item.price)}
-                                            className="select-none cursor-pointer flex justify-center items-center w-8 h-8 rounded-full bg-gray-200">
-                                            -
-                                        </button>
-                                        <p>
-                                            {
-                                                cartArray.map((subItem: any) => {
-                                                    let matching = subItem.product_id === item._id;
-                                                    let quantity = subItem.quantity;
-                                                    if (matching) {
-                                                        return quantity;
-                                                    } else {
-                                                        return ""
-                                                    }
-                                                })
-                                            }
-                                        </p>
-                                        <button
-                                            onClick={() => handleIncrementByOne(item._id, item.price)}
-                                            disabled={loading}
-                                            className="border select-none cursor-pointer flex justify-center items-center w-8 h-8 rounded-full  border-gray-800"
-                                        >
-                                            +
-                                        </button>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
-                    ))}
+                        )
+                    })}
                 </div>
 
 

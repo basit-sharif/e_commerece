@@ -14,7 +14,6 @@ const SubComp = () => {
     function handleEditName() {
         updateUserNamePhoto(nameOf);
         setUserEditingName(false);
-        window.location.reload();
     }
 
     return (
@@ -63,9 +62,9 @@ const SubComp = () => {
                         }
                         <h4 className="text-lg "><b>Email : </b>{userData.email}</h4>
                         <p className="text-sm"><b>Is Email varified :</b> {userData.emailVerified ? "Varified" : "Unvarified"}</p>
-                        <button className="underline text-blue-600 text-sm" onClick={sendEmailVerificationCode}>
+                        {userData.emailVerified && <button className="underline text-blue-600 text-sm" onClick={sendEmailVerificationCode}>
                             Varify Email
-                        </button>
+                        </button>}
                         <p className="my-2 text-xs text-red-600 font-light">Please check you inbox after Clicking Varify Email</p>
                         <p className="my-2 text-xs text-red-600 font-light">If changes did not reflected please refresh</p>
                         <button className="w-full border rounded-lg p-2" onClick={LogOut}>
