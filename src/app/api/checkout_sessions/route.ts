@@ -62,6 +62,7 @@ let orignalData: Array<typeOfData> = [
     },
 ]
 
+// @ts-ignore
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function POST(req: NextRequest) {
