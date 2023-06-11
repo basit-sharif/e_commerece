@@ -115,9 +115,11 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
             method: "POST",
             body: JSON.stringify(allProductsForCart)
         })
-        let { link } = await linkOrg.json()
+        if (linkOrg) {
+            let { link } = await linkOrg.json()
+            window.location.href = link
+        }
         setLoadings(false);
-        window.location.href = link
     }
 
     return (

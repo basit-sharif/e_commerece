@@ -62,7 +62,7 @@ const SubComp = () => {
                         }
                         <h4 className="text-lg "><b>Email : </b>{userData.email}</h4>
                         <p className="text-sm"><b>Is Email varified :</b> {userData.emailVerified ? "Varified" : "Unvarified"}</p>
-                        {userData.emailVerified && <button className="underline text-blue-600 text-sm" onClick={sendEmailVerificationCode}>
+                        {!userData.emailVerified && <button className="underline text-blue-600 text-sm" onClick={sendEmailVerificationCode}>
                             Varify Email
                         </button>}
                         <p className="my-2 text-xs text-red-600 font-light">Please check you inbox after Clicking Varify Email</p>
