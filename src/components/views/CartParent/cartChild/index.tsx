@@ -35,14 +35,13 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
 
     function PriceSubTotal() {
         let orignalToSend: number = 0;
-        for (let index = 0; index < cartArray.length; index++) {
-            const element = cartArray[index];
+        allProductsForCart && allProductsForCart.forEach((element: oneProductType) => {
             let subTotalPrice = element.quantity * element.price;
             orignalToSend = orignalToSend + subTotalPrice;
-            if (subTotalPrice) {
-                setTotalPrice(orignalToSend);
-                router.refresh();
-            }
+        });
+        if (orignalToSend !== 0) {
+            setTotalPrice(orignalToSend);
+            router.refresh();
         }
     }
 
@@ -68,7 +67,18 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                     };
                 };
             });
-            setAllProductsForCart(data);
+            let updatedData = data.map((elem: oneProductType) => {
+                for (let index = 0; index < cartArray.length; index++) {
+                    let element: any = cartArray[index];
+                    if (element.product_id === elem._id) {
+                        return {
+                            ...elem,
+                            quantity: element.quantity,
+                        }
+                    };
+                };
+            })
+            setAllProductsForCart(updatedData);
         }
 
     }, [cartArray]);
@@ -138,7 +148,7 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
 
                 <div className="flex flex-col basis-[69%] gap-4">
 
-                    {allProductsForCart && allProductsForCart.map((item: oneProductType, index: number) => {
+                    {allProductsForCart ? allProductsForCart.map((item: oneProductType, index: number) => {
                         return (
                             <div key={index} className=" flex flex-shrink-0 gap-6">
                                 <div className="w-[14rem]">
@@ -162,20 +172,7 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                                                 className="select-none cursor-pointer flex justify-center items-center w-8 h-8 rounded-full bg-gray-200">
                                                 -
                                             </button>
-                                            <p>
-                                                {
-                                                    cartArray.map((subItem: any) => {
-                                                        let matching = subItem.product_id === item._id;
-                                                        let quantity = subItem.quantity;
-                                                        console.log(quantity)
-                                                        if (matching) {
-                                                            return quantity;
-                                                        } else {
-                                                            return ""
-                                                        }
-                                                    })
-                                                }
-                                            </p>
+                                            <p>{item.quantity}</p>
                                             <button
                                                 onClick={() => handleIncrementByOne(item._id, item.price)}
                                                 disabled={loading}
@@ -188,7 +185,29 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                                 </div>
                             </div>
                         )
-                    })}
+                    }) :
+                        !userData ? (
+                            <div className="text-center font-semibold text-gray-800 text-xl">Please login First</div>
+                        ) :
+                            arrayForLoading.map(() => (
+                                <div className="border border-blue-300 shadow rounded-md p-4 w-full mx-auto">
+                                    <div className="flex animate-pulse gap-4">
+                                        <div className="bg-slate-200 rounded-lg h-32 w-4/12"></div>
+                                        <div className="flex-1 space-y-6 py-1">
+                                            <div className="grid grid-cols-3 gap-4">
+                                                <div className="h-2 bg-slate-200 rounded col-span-2"></div>
+                                                <div className="h-2 bg-slate-200 rounded col-span-1"></div>
+                                            </div>
+                                            <div className="space-y-3">
+                                                <div className="h-2 bg-slate-200 rounded"></div>
+                                                <div className="h-2 bg-slate-200 rounded"></div>
+                                            </div>
+                                            <div className="h-8 w-16 bg-slate-200 rounded"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                    }
                 </div>
 
 
@@ -220,3 +239,6 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
 }
 
 export default CartComp
+
+
+let arrayForLoading = [1, 2, 3, 4]

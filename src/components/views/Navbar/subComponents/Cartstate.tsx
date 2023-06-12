@@ -4,14 +4,7 @@ import { useContext, useEffect, useState } from "react"
 import { BsCart2 } from "react-icons/bs"
 
 const Cartstate = () => {
-    let { cartArray } = useContext(cartContext);
-    const [quantity, setQuantity] = useState(0);
-
-    useEffect(() => {
-        if (cartArray.length !== 0) {
-            setQuantity(cartArray.length);
-        }
-    }, [cartArray]);
+    let { cartArray,quantity } = useContext(cartContext);
 
     return (
         <div className="flex-shrink-0 relative w-11 h-11 bg-gray-300 rounded-full flex items-center justify-center">

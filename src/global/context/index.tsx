@@ -22,7 +22,14 @@ const ContextWrapper = ({ children }: { children: ReactNode }) => {
     const [errorsOfFirebase, setErrorsOfFirebase] = useState({
         key: "",
         errorMessage: "",
-    })
+    });
+    const [quantity, setQuantity] = useState(0);
+
+    useEffect(() => {
+        if (cartArray.length !== 0) {
+            setQuantity(cartArray.length);
+        }
+    }, [cartArray])
 
     async function fetchApiForAllCartItems() {
         if (userData) {
@@ -194,7 +201,21 @@ const ContextWrapper = ({ children }: { children: ReactNode }) => {
     }
 
     return (
-        <cartContext.Provider value={{ cartArray, errorsOfFirebase, dispatch, updateUserNamePhoto, userData, sendEmailVerificationCode, signUpUser, signUpViaGoogle, signInUser, LogOut, loading }}>
+        <cartContext.Provider value={{
+            cartArray,
+            errorsOfFirebase,
+            dispatch,
+            updateUserNamePhoto,
+            userData,
+            sendEmailVerificationCode,
+            signUpUser,
+            signUpViaGoogle,
+            signInUser,
+            LogOut,
+            loading,
+            quantity,
+            setQuantity,
+        }}>
             {children}
         </cartContext.Provider>
     )
