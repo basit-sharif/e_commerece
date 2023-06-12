@@ -18,6 +18,7 @@
     "@vercel/postgres": "^0.3.0",
     "autoprefixer": "10.4.14",
     "drizzle-orm": "^0.26.5",
+    "encoding": "^0.1.13",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.3",
     "firebase": "^9.22.1",
