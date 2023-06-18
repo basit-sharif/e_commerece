@@ -36,22 +36,22 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
 
     function PriceSubTotal() {
         let orignalToSend: number = 0;
-        if (allProductsForCart.length > 0) {
-            allProductsForCart && allProductsForCart.forEach((element: oneProductType) => {
-                let subTotalPrice = element.quantity * element.price;
-                orignalToSend = orignalToSend + subTotalPrice;
-            });
-            if (orignalToSend !== 0) {
-                setTotalPrice(orignalToSend);
-                router.refresh();
-            }
-        } else {
-            setTotalPrice(0)
+        allProductsForCart && allProductsForCart.forEach((element: oneProductType) => {
+            let subTotalPrice = element.quantity * element.price;
+            orignalToSend = orignalToSend + subTotalPrice;
+        });
+        if (orignalToSend !== 0) {
+            setTotalPrice(orignalToSend);
+            router.refresh();
         }
+
     }
 
 
     useEffect(() => {
+        if (allProductsForCart.length == 0) {
+            setTotalPrice(0);
+        }
         PriceSubTotal();
     }, [allProductsForCart])
 
