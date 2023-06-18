@@ -189,8 +189,8 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                         !userData ? (
                             <div className="text-center font-semibold text-gray-800 text-xl">Please login First</div>
                         ) :
-                            arrayForLoading.map(() => (
-                                <div className="border border-blue-300 shadow rounded-md p-4 w-full mx-auto">
+                            arrayForLoading.map((index: number) => (
+                                <div key={index} className="border border-blue-300 shadow rounded-md p-4 w-full mx-auto">
                                     <div className="flex animate-pulse gap-4">
                                         <div className="bg-slate-200 rounded-lg h-32 w-4/12"></div>
                                         <div className="flex-1 space-y-6 py-1">
