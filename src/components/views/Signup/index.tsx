@@ -31,7 +31,6 @@ const SignupFormComp = () => {
     }, [userData, errorsOfFirebase]);
 
 
-
     const [formData, setFormData] = useState<SignupFormData>({
         fullName: '',
         email: '',
