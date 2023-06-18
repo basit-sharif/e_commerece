@@ -62,7 +62,7 @@ const ContextWrapper = ({ children }: { children: ReactNode }) => {
             });
         } else if (payload === "removeFromCart") {
             console.log("func running of remove from cart");
-            let dataa = await fetch(`${BASE_PATH_FORAPI}/api/cartfunc?product_id=${data.product_id}&user_id=${data.user_id}`, {
+            let dataa = await fetch(`api/cartfunc?product_id=${data.product_id}&user_id=${data.user_id}`, {
                 method: "DELETE",
             });
             let NotData = await dataa.json();
