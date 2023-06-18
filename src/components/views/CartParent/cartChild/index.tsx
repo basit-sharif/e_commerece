@@ -36,13 +36,17 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
 
     function PriceSubTotal() {
         let orignalToSend: number = 0;
-        allProductsForCart && allProductsForCart.forEach((element: oneProductType) => {
-            let subTotalPrice = element.quantity * element.price;
-            orignalToSend = orignalToSend + subTotalPrice;
-        });
-        if (orignalToSend !== 0) {
-            setTotalPrice(orignalToSend);
-            router.refresh();
+        if (allProductsForCart.length > 0) {
+            allProductsForCart && allProductsForCart.forEach((element: oneProductType) => {
+                let subTotalPrice = element.quantity * element.price;
+                orignalToSend = orignalToSend + subTotalPrice;
+            });
+            if (orignalToSend !== 0) {
+                setTotalPrice(orignalToSend);
+                router.refresh();
+            }
+        } else {
+            setTotalPrice(0)
         }
     }
 
