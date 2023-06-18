@@ -44,14 +44,10 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
             setTotalPrice(orignalToSend);
             router.refresh();
         }
-
     }
 
 
     useEffect(() => {
-        if (allProductsForCart.length == 0) {
-            setTotalPrice(0);
-        }
         PriceSubTotal();
     }, [allProductsForCart])
 
