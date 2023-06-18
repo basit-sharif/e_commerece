@@ -58,7 +58,7 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
         }
     }
     useEffect(() => {
-        if (cartArray.length !== 0) {
+        if (cartArray) {
             let data = allProductsOfStore.filter((item: oneProductType) => {
                 for (let index = 0; index < cartArray.length; index++) {
                     let element: any = cartArray[index];
@@ -157,7 +157,7 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                                 <div className="space-y-1 md:space-y-3 w-full">
                                     <div className="flex justify-between">
                                         <h2 className="md:text-2xl font-light text-gray-700">{item.productName}</h2>
-                                        <div onClick={() => handleRemove(item._id)}>
+                                        <div className="cursor-pointer" onClick={() => handleRemove(item._id)}>
                                             <RiDeleteBin6Line size={28} />
                                         </div>
                                     </div>
