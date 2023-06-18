@@ -10,6 +10,7 @@ import imageUrlBuilder from '@sanity/image-url'
 import toast, { Toaster } from "react-hot-toast"
 import { useRouter } from "next/navigation"
 import BASE_PATH_FORAPI from "@/components/shared/BasePath"
+import LoadingComp from "@/components/shared/LoadingComp"
 
 
 
@@ -157,9 +158,11 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                                 <div className="space-y-1 md:space-y-3 w-full">
                                     <div className="flex justify-between">
                                         <h2 className="md:text-2xl font-light text-gray-700">{item.productName}</h2>
-                                        <div className="cursor-pointer" onClick={() => handleRemove(item._id)}>
-                                            <RiDeleteBin6Line size={28} />
-                                        </div>
+                                        {loading ? <LoadingComp size={"w-10"} /> :
+                                            <div className="cursor-pointer" onClick={() => handleRemove(item._id)}>
+                                                <RiDeleteBin6Line size={28} />
+                                            </div>
+                                        }
                                     </div>
                                     <p className="text-gray-400 font-medium">{item.productTypes[1] ? item.productTypes[1] : "All"}</p>
                                     <h3 className="text-sm md:text-base">Delivery Estimation</h3>
