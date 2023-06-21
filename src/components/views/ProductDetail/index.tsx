@@ -96,7 +96,7 @@ const ProductDetail: FC<{ item: oneProductType }> = ({ item }) => {
           </div>
 
           {/* right */}
-          <div className="w-[33rem] flex flex-wrap-0">
+          <div className="w-[17rem] md:w-[33rem] flex flex-wrap-0">
             {item.image.map((subItem: imagesType, index: number) => {
               if (subItem._key === imageForPreviewOfSelected) {
                 return (
