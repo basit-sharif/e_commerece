@@ -10,6 +10,7 @@ import imageUrlBuilder from '@sanity/image-url'
 import toast, { Toaster } from "react-hot-toast"
 import { useRouter } from "next/navigation"
 import BASE_PATH_FORAPI from "@/components/shared/BasePath"
+import LoadingComp from "@/components/shared/LoadingComp"
 
 
 
@@ -58,7 +59,7 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
         }
     }
     useEffect(() => {
-        if (cartArray.length !== 0) {
+        if (cartArray) {
             let data = allProductsOfStore.filter((item: oneProductType) => {
                 for (let index = 0; index < cartArray.length; index++) {
                     let element: any = cartArray[index];
@@ -121,7 +122,7 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
 
     async function handleProcessCheckout() {
         setLoadings(true);
-        let linkOrg: any = await fetch(`${BASE_PATH_FORAPI}/api/checkout_sessions`, {
+        let linkOrg: any = await fetch(`/api/checkout_sessions`, {
             method: "POST",
             body: JSON.stringify(allProductsForCart)
         })
@@ -157,9 +158,11 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                                 <div className="space-y-1 md:space-y-3 w-full">
                                     <div className="flex justify-between">
                                         <h2 className="md:text-2xl font-light text-gray-700">{item.productName}</h2>
-                                        <div onClick={() => handleRemove(item._id)}>
-                                            <RiDeleteBin6Line size={28} />
-                                        </div>
+                                        {loading ? <LoadingComp size={"w-10"} /> :
+                                            <div className="cursor-pointer" onClick={() => handleRemove(item._id)}>
+                                                <RiDeleteBin6Line size={28} />
+                                            </div>
+                                        }
                                     </div>
                                     <p className="text-gray-400 font-medium">{item.productTypes[1] ? item.productTypes[1] : "All"}</p>
                                     <h3 className="text-sm md:text-base">Delivery Estimation</h3>
@@ -189,8 +192,8 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                         !userData ? (
                             <div className="text-center font-semibold text-gray-800 text-xl">Please login First</div>
                         ) :
-                            arrayForLoading.map((item:number) => (
-                                <div key={item} className="border border-blue-300 shadow rounded-md p-4 w-full mx-auto">
+                            arrayForLoading.map((index: number) => (
+                                <div key={index} className="border border-blue-300 shadow rounded-md p-4 w-full mx-auto">
                                     <div className="flex animate-pulse gap-4">
                                         <div className="bg-slate-200 rounded-lg h-32 w-4/12"></div>
                                         <div className="flex-1 space-y-6 py-1">
