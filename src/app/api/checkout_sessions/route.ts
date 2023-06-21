@@ -11,52 +11,52 @@ interface typeOfData {
 
 let orignalData: Array<typeOfData> = [
     {
-        price: 'price_1NH3l5SGP918EeainhlVNKsL',
+        price: 'price_1NLM6oGWv7lYUltJ5GnDYwfO',
         name: 'Pink Fleece Sweatpants',
         quantity: 1,
     },
     {
-        price: 'price_1NHCSoSGP918EeaitdaGJFnM',
+        price: 'price_1NLM8bGWv7lYUltJS8C3UtWh',
         name: 'Brushed Raglan Sweatshirt',
         quantity: 1,
     },
     {
-        price: 'price_1NHCVSSGP918EeaiKOHQlFJk',
+        price: 'price_1NLMBFGWv7lYUltJUgbOCM7F',
         name: 'Cameryn Sash Tie Dress',
         quantity: 1,
     },
     {
-        price: 'price_1NHCXISGP918Eeair5JmVaCK',
+        price: 'price_1NLMK3GWv7lYUltJOAdEdaDA',
         name: 'Imperial Alpaca Hoodie',
         quantity: 1,
     },
     {
-        price: 'price_1NHCYVSGP918EeailpafOJg7',
+        price: 'price_1NLMM8GWv7lYUltJnKC8hHsJ',
         name: 'Kids One',
         quantity: 1,
     },
     {
-        price: 'price_1NHCboSGP918Eeai9Ok4CYaS',
+        price: 'price_1NLMO2GWv7lYUltJSuKwqJ5r',
         name: 'Imperial Alpaca Hoodie Woman',
         quantity: 1,
     },
     {
-        price: 'price_1NHCcxSGP918EeaiIptQokgW',
+        price: 'price_1NLMPgGWv7lYUltJ3B1ST39E',
         name: 'Flex Sweatpants',
         quantity: 1,
     },
     {
-        price: 'price_1NHCdpSGP918EeairCbrSid6',
+        price: 'price_1NLMR4GWv7lYUltJInH1xRm9',
         name: 'Lite Sweatpants',
         quantity: 1,
     },
     {
-        price: 'price_1NHCfDSGP918EeaiVS5kQfOu',
+        price: 'price_1NLOOiGWv7lYUltJawy9Sxy7',
         name: 'Raglan Sweatshirt',
         quantity: 1,
     },
     {
-        price: 'price_1NHCnESGP918EeaibM0RgW0f',
+        price: 'price_1NLOQ0GWv7lYUltJzyBK3ZyP',
         name: 'Flex Push Button Bomber',
         quantity: 1,
     },
